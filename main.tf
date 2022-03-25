@@ -39,8 +39,7 @@ resource "aws_security_group_rule" "https_ingress" {
 }
 
 module "access_logs" {
-  source                             = "cloudposse/lb-s3-bucket/aws"
-  version                            = "0.14.1"
+  source                            = "git::https://github.com/kkmiquido/terraform-aws-lb-s3-bucket?ref=refactor-s3-resource-v4" #TODO: restore cloudposse when released
   enabled                            = module.this.enabled && var.access_logs_enabled && var.access_logs_s3_bucket_id == null
   attributes                         = compact(concat(module.this.attributes, ["alb", "access", "logs"]))
   lifecycle_rule_enabled             = var.lifecycle_rule_enabled
